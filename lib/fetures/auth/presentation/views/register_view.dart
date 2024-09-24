@@ -22,7 +22,7 @@ class RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<RegisterView> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  String? email, password, phone, fatherPhone, name;
+  String? email, password, name;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +41,7 @@ class _RegisterViewState extends State<RegisterView> {
             },
             actionTitle: 'OK',
           );
-        } else if (state is AuthLoading) {
-          Navigator.pushNamed(context, VerificationView.id);
-        }
+        } 
       },
       builder: (context, state) {
         return CustomProgressHUD(

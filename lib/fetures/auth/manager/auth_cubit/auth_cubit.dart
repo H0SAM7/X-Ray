@@ -9,52 +9,43 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
-
-  Future<void> register(
-      {required String email, required String password}) async {
-    emit(AuthLoading());
-    try {
-      final userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      User? user = userCredential.user;
-      if (user != null) {
-        if (!user.emailVerified) {
-          await user.sendEmailVerification();
-          log('Verification email sent. Please check your inbox.');
-        }
-        bool eVerified = await waitForEmailVerification(user);
-        await checkEmailVerification(user);
-
-        if (eVerified) {
-          // await firestore.collection('users').doc(user.uid).set({
-          //   'uid': user.uid,
-          //   'email': email,
-          //  // 'username': username,
-          //   // Add other fields as needed
-          // });
-          // await FirebaseFirestore.instance.collection('users').add({
-          //   "email": email,
-          // });
-
-          emit(AuthSuccess());
-       
-          log('User account created successfully.');
-        } else {
-          // If email verification fails, delete the user and throw an exception
-          await user.delete();
-          emit(AuthFailure(errMessage: 'Email verification failed.'));
-        }
+Future<void> register({required String email, required String password}) async {
+  emit(AuthLoading());
+  try {
+    final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    User? user = userCredential.user;
+    if (user != null) {
+      if (!user.emailVerified) {
+        await user.sendEmailVerification();
+        log('Verification email sent. Please check your inbox.');
       }
-    } catch (e) {
-      emit(AuthFailure(
-          errMessage: FirebaseFailure.fromFirebaseException(e as Exception)
-              .errMessage
-              .toString()));
+      bool eVerified = await waitForEmailVerification(user);
+      await checkEmailVerification(user);
+
+      if (eVerified) {
+
+        emit(AuthSuccess());
+        log('User account created successfully.');
+      } else {
+        // If email verification fails, delete the user and throw an exception
+        await user.delete();
+        emit(AuthFailure(errMessage: 'Email verification failed.'));
+      }
     }
+  } catch (e) {
+    // Catch any type of error or use specific Firebase exception
+    String errorMessage;
+    if (e is FirebaseAuthException) {
+      errorMessage = FirebaseFailure.fromFirebaseException(e).errMessage.toString();
+    } else {
+      errorMessage = 'An unexpected error occurred.';
+    }
+    emit(AuthFailure(errMessage: errorMessage));
   }
+}
 
   Future<void> login({required String email, required String password}) async {
     emit(AuthLoading());
