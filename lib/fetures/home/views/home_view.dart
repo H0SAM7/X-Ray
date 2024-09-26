@@ -31,40 +31,46 @@ class HomeView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ElevatedButton.icon(
-              onPressed: () {
-Navigator.pushNamed(context, ChatView.id);              },
-              icon: const Icon(Icons.add_a_photo,color: Colors.white,),
-              label: Text(
-                'Send New Image',
-                style: AppStyles.styleMeduim24.copyWith(color: Colors.white),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: blueColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+            SizedBox(
+              width: 300,
+              child: ElevatedButton.icon(
+                onPressed: () {
+              Navigator.pushNamed(context, ChatView.id);              },
+                icon: const Icon(Icons.add_a_photo,color: Colors.white,),
+                label: Text(
+                  'Send New Image',
+                  style: AppStyles.styleMeduim24.copyWith(color: Colors.white),
                 ),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: blueColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                ),
               ),
             ),
             const SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: () {
-                // Logic to view history
-              },
-              icon: const Icon(Icons.history, color: Colors.white,),
-              label: Text(
-                'View History',
-                style:
-                    AppStyles.poppinsStylebold20.copyWith(color: Colors.white),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF03DAC5),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+            SizedBox(
+              width: 300,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  // Logic to view history
+                },
+                icon: const Icon(Icons.history, color: Colors.white,),
+                label: Text(
+                  'View History',
+                  style:
+                      AppStyles.poppinsStylebold20.copyWith(color: Colors.white),
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF03DAC5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                ),
               ),
             ),
           ],

@@ -17,7 +17,7 @@ class StartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-   // final s = S.of(context);
+    // final s = S.of(context);
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,43 +39,40 @@ class StartView extends StatelessWidget {
             label: 'Start',
             color: blueColor,
             txtColor: Colors.white,
-           onTap: () async {
-          bool isCrashed = await readCrash();
-          if (isCrashed) {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return ConfirmationDialog2(
-                  title: 'OOOOOOOOPs',
-                  content:
-                      'العب بعيد يحمادة',
-                  onConfirm: () {
-                  Navigator.pop(context);
+            onTap: () async {
+              bool isCrashed = await readCrash();
+              if (isCrashed) {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return ConfirmationDialog2(
+                      title: 'OOOOOOOOPs',
+                      content: 'العب بعيد يحمادة',
+                      onConfirm: () {
+                        Navigator.pop(context);
+                      },
+                      action: 'موافق',
+                    );
                   },
-                  action: 'موافق',
                 );
-              },
-            );
-          } else {
-            FirebaseAuth.instance.authStateChanges().listen((User? user) {
-              if (user == null) {
-                Navigator.pushNamed(context, RegisterView.id);
-                log('User is currently signed out!');
               } else {
-               if (user.emailVerified) {
+                FirebaseAuth.instance.authStateChanges().listen((User? user) {
+                  if (user == null) {
+                    Navigator.pushNamed(context, RegisterView.id);
+                    log('User is currently signed out!');
+                  } else {
+                    if (user.emailVerified) {
                       Navigator.pushReplacementNamed(context, HomeView.id);
                       log('User is signed in!');
                     } else if (!user.emailVerified) {
-                      Navigator.pushNamed(
-                          context, VerificationView.id);
+                      Navigator.pushNamed(context, VerificationView.id);
                     } else {
                       Navigator.pushNamed(context, RegisterView.id);
                     }
+                  }
+                });
               }
-            });
-          }
-
-        },
+            },
           ),
           const SizedBox(
             height: 50,
