@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:x_ray2/constants.dart';
 import 'package:x_ray2/core/utils/app_styles.dart';
 import 'package:x_ray2/fetures/home/views/chat_view.dart';

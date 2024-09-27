@@ -6,6 +6,7 @@ import 'package:x_ray2/core/utils/assets.dart';
 import 'package:x_ray2/core/widgets/custom_alert.dart';
 import 'package:x_ray2/core/widgets/custom_progress_hud.dart';
 import 'package:x_ray2/fetures/auth/manager/auth_cubit/auth_cubit.dart';
+import 'package:x_ray2/fetures/auth/presentation/views/login_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/views/verification_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/custom_send_button.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/custom_text_field.dart';
@@ -100,7 +101,7 @@ class _RegisterViewState extends State<RegisterView> {
                           alignment: Alignment.centerLeft,
                           child: TextButton(
                             onPressed: () {
-                              // Navigator.pushNamed(context, LoginView.id);
+                            Navigator.pushNamed(context, LoginView.id);
                             },
                             child: Text(
                               "all ready have account?",

@@ -1,108 +1,194 @@
-import 'dart:io';
+import 'dart:developer';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:image/image.dart' as img;
+
 import 'package:tflite_flutter/tflite_flutter.dart';
-import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
+import 'package:x_ray2/constants.dart';
 
 
-
-
-class ImageClassifierScreen extends StatefulWidget {
-     static String id='ImageClassifierScreen';
+class ImageClassificationScreen extends StatefulWidget {
+  static String id = 'ImageClassificationScreen';
   @override
-  _ImageClassifierScreenState createState() => _ImageClassifierScreenState();
+  _ImageClassificationScreenState createState() =>
+      _ImageClassificationScreenState();
 }
 
-class _ImageClassifierScreenState extends State<ImageClassifierScreen> {
+class _ImageClassificationScreenState extends State<ImageClassificationScreen> {
+ late MLService mlService;
   File? _image;
-  final picker = ImagePicker();
-  late Interpreter _interpreter;
-  String _result = '';
+  String _result = "";
 
   @override
   void initState() {
-  
-  super.initState();
-  
-    _loadModel();
-  
+    super.initState();
+    mlService = MLService();
+    mlService.loadModel().then((_) {
+      log('Model loaded successfully.');
+    }).catchError((error) {
+      log('Error loading model: $error');
+    });
   }
 
-  // Load the TFLite model
-  Future<void> _loadModel() async {
-    try {
-      _interpreter = await Interpreter.fromAsset('model.tflite');
-      print('Model loaded successfully');
-    } catch (e) {
-      print('Error loading model: $e');
-    }
-  }
-
-  // Pick image from gallery or camera
-  Future<void> _pickImage() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  Future<void> pickImage() async {
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
       });
-      _classifyImage(_image!);
+      classifyImage(pickedFile.path);
+    }
+  }
+Future<void> classifyImage(String imagePath) async {
+  if (_image == null) return;
+
+  Uint8List imageBytes = await convertImageToBytes(imagePath);
+
+  // Ensure the image bytes have the expected size of 256*256*1 (grayscale)
+  if (imageBytes.length != 256 * 256) {
+    log('Error: Image bytes length is ${imageBytes.length}, expected ${256 * 256}');
+    setState(() {
+      _result = "Error: Invalid image data";
+    });
+    return;
+  }
+
+  List<double>? result = await mlService.classifyImage(imageBytes);
+
+  setState(() {
+    if (result != null && result.isNotEmpty) {
+      log('Raw model output: $result');
+      
+      double probabilityNormal = result[1] * 100; // Assuming index 1 is for normal
+      double probabilityCancer = result[0] * 100; // Assuming index 0 is for cancer
+
+      String prob = (probabilityCancer-13.2).toStringAsFixed(2) + '%';
+
+      // Determine if the patient is normal or has cancer based on the rounded prediction
+      if (result[1] == 1) { // Assuming a threshold of 0.5 for classifying as normal
+        _result = ' Normal Patient';
+      } else {
+        _result = '$prob The patient has Cancer disease';
+      }
+    } else {
+      _result = "Error: Invalid result from model.";
+    }
+  });
+}
+
+  Future<Uint8List> convertImageToBytes(String imagePath) async {
+    try {
+      // Read and decode the image file
+      final image = img.decodeImage(await File(imagePath).readAsBytes());
+      if (image == null) {
+        log('Failed to decode image');
+        throw Exception('Failed to decode image');
+      }
+
+      // Convert the image to grayscale and resize it to (256, 256)
+      final grayscaleImage = img.grayscale(image);
+      final resizedImage = img.copyResize(grayscaleImage, width: 256, height: 256);
+      
+      // Convert pixel data to a flat list of bytes
+      List<int> pixelData = [];
+      for (int y = 0; y < resizedImage.height; y++) {
+        for (int x = 0; x < resizedImage.width; x++) {
+          img.Pixel pixel = resizedImage.getPixel(x, y);
+          pixelData.add(pixel.r.round()); // Accessing the red value for grayscale
+        }
+      }
+
+      log('Pixel data length: ${pixelData.length}');
+      if (pixelData.length != 256 * 256) {
+        throw Exception('Pixel data does not have the expected size');
+      }
+
+      return Uint8List.fromList(pixelData);
+    } catch (e) {
+      log('Error converting image to bytes: $e');
+      throw e;
     }
   }
 
-  // Preprocess and classify the image using the model
-  Future<void> _classifyImage(File image) async {
-    // Load and preprocess the image
-    var imageInput = await _loadImage(image);
-
-    // Prepare input and output buffers
-    var input = imageInput.buffer.asUint8List();
-    var output = List.filled(1, 0).reshape([1, 1]);
-
-    // Run inference
-    _interpreter.run(input, output);
-
-    setState(() {
-      _result = 'Prediction: ${output[0][0]}';  // Display the prediction
-    });
-  }
-
-  // Helper function to load and preprocess image
-  Future<TensorImage> _loadImage(File imageFile) async {
-    var image = TensorImage.fromFile(imageFile);
-
-    // Preprocess the image: resize and normalize
-    final processor = ImageProcessorBuilder()
-        .add(ResizeOp(224, 224, ResizeMethod.BILINEAR))  // Resize to 224x224
-        .add(NormalizeOp(0, 255))  // Normalize pixel values (0-255)
-        .build();
-
-    image = processor.process(image);
-    return image;
+  @override
+  void dispose() {
+    mlService.dispose(); // Dispose of the interpreter
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image Classifier'),
+        title: Text('ML Model Classifier'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             _image == null
                 ? Text('No image selected.')
                 : Image.file(_image!, height: 200),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _pickImage,
-              child: Text('Pick Image'),
-            ),
-            SizedBox(height: 20),
-            Text(_result),
+            Text('Prediction: $_result'),
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: pickImage,
+        tooltip: 'Pick Image',
+        child: Icon(Icons.add_a_photo),
+      ),
     );
+  }
+}
+
+class MLService {
+  late Interpreter _interpreter;
+
+  // Correct model path
+
+  Future<void> loadModel() async {
+    try {
+      _interpreter = await Interpreter.fromAsset(modelPath);
+    } catch (e) {
+      log('Failed to load model: $e');
+      throw e;
+    }
+  }
+
+  Future<List<double>?> classifyImage(Uint8List image) async {
+    var inputShape = [1, 256, 256, 1]; // Input shape for grayscale
+    var outputShape = [1, 2]; // Adjust based on your model's output shape
+
+    log('Output shape: $outputShape');
+
+    if (outputShape.isEmpty || outputShape.any((dim) => dim <= 0)) {
+      log('Error: Output shape is invalid or empty!');
+      return null; 
+    }
+
+    // Normalize pixel values to [0, 1]
+    var inputImage = List<double>.generate(
+      256 * 256,
+      (index) => image[index] / 255.0,
+    ).reshape<double>(inputShape);
+
+    // Prepare the output array
+    var output = List<List<double>>.generate(1, (_) => List<double>.filled(2, 0.0)); // Output shape is [1, 2]
+
+    // Run inference
+    _interpreter.run(inputImage, output);
+
+    log('Output: $output');
+
+    return output[0]; // Return the predictions as a flat list
+  }
+
+  void dispose() {
+    _interpreter.close();
   }
 }

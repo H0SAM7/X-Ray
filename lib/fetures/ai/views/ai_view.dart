@@ -1,35 +1,70 @@
-// import 'dart:developer';
+// import 'package:flutter/material.dart';
+// import 'package:image_picker/image_picker.dart';
+// import 'package:image/image.dart' as img;
+// import 'package:x_ray2/fetures/ai/views/test_view.dart';
+// import 'dart:io';
 
-// import 'package:dio/dio.dart';
+// class BrainTumorDetector extends StatefulWidget {
+//   @override
+//   _BrainTumorDetectorState createState() => _BrainTumorDetectorState();
+// }
 
-// class ApiService {
-//   final Dio _dio;
+// class _BrainTumorDetectorState extends State<BrainTumorDetector> {
+//   final ImagePicker _picker = ImagePicker();
+//   BrainTumorModel model = BrainTumorModel();
+//   File? _image;
+//   String _result = '';
 
-//   ApiService() : _dio = Dio(BaseOptions(
-//     baseUrl: 'https://api.openai.com/v1/',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'Authorization': 'Bearer your-openai-api-key', // Replace with your actual API key
-//     },
-//   ));
+//   @override
+//   void initState() {
+//     super.initState();
+//     model.loadModel();  // Load the model when the app starts
+//   }
 
-//   Future<String> fetchOpenAIResponse(String prompt) async {
-//     try {
-//       final response = await _dio.post('completions', data: {
-//         'model': 'text-davinci-003', // Choose the appropriate model
-//         'prompt': prompt,
-//         'max_tokens': 100,
+//   Future<void> _pickImage() async {
+//     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+//     if (pickedFile != null) {
+//       setState(() {
+//         _image = File(pickedFile.path);
 //       });
-
-//       // Check for a successful response
-//       if (response.statusCode == 200) {
-//         return response.data['choices'][0]['text'].toString();
-//       } else {
-//         throw Exception('Failed to generate response');
-//       }
-//     } catch (e) {
-//       log('Error: $e');
-//       return 'Error occurred: $e';
+//       _classifyImage(File(pickedFile.path));
 //     }
+//   }
+
+//   Future<void> _classifyImage(File imageFile) async {
+//     final bytes = await imageFile.readAsBytes();
+//     final image = img.decodeImage(bytes);
+
+//     if (image != null) {
+//       await model.classifyImage(image);
+//       setState(() {
+//         _result = 'Classification completed!';  // Modify to show actual result
+//       });
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Brain Tumor Detector'),
+//       ),
+//       body: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           _image == null
+//               ? Text('No image selected.')
+//               : Image.file(_image!),
+//           SizedBox(height: 16),
+//           Text('Result: $_result'),
+//           SizedBox(height: 16),
+//           ElevatedButton(
+//             onPressed: _pickImage,
+//             child: Text('Pick an Image'),
+//           ),
+//         ],
+//       ),
+//     );
 //   }
 // }

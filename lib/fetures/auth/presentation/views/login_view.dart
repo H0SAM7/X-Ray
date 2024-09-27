@@ -98,7 +98,7 @@ class _LoginViewState extends State<LoginView> {
                           alignment: Alignment.centerLeft,
                           child: TextButton(
                             onPressed: () {
-                              // Navigator.pushNamed(context, LoginView.id);
+                            Navigator.pushNamed(context, RegisterView.id);
                             },
                             child: Text(
                               'Forget Password?',
