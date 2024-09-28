@@ -10,8 +10,10 @@ import 'package:image/image.dart' as img;
 
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:x_ray2/constants.dart';
+import 'package:x_ray2/core/models/search_model.dart';
 import 'package:x_ray2/core/utils/app_styles.dart';
 import 'package:x_ray2/core/widgets/custom_container.dart';
+import 'package:x_ray2/fetures/ai/views/save_data.dart';
 
 class ImageClassificationScreen extends StatefulWidget {
   static String id = 'ImageClassificationScreen';
@@ -129,12 +131,14 @@ class _ImageClassificationScreenState extends State<ImageClassificationScreen> {
     super.dispose();
   }
 
-  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: Text('Cancer Classification'),
       ),
       body: Center(
@@ -148,7 +152,7 @@ class _ImageClassificationScreenState extends State<ImageClassificationScreen> {
                 CircleAvatar(
                     radius: 80,
                     backgroundImage:
-                        Image.file(_image!, height: 200) as ImageProvider,
+                       FileImage(_image!),
                   ),
             SizedBox(height: 20),
             //  Text('Prediction: $_result'),
@@ -169,25 +173,32 @@ class _ImageClassificationScreenState extends State<ImageClassificationScreen> {
                     children: [
                       CustomContainer(
                         color: blueColor,
+                        height: 60,
                         child: Text(
                           'Prediction: $_result',
                           style: AppStyles.styleMeduim24
                               .copyWith(fontSize: 15, color: Colors.white),
                         ),
                       ),
+                      SizedBox(height: 20),
                       CustomContainer(
+                        color: Colors.blue,
                         child: Text(
-                          'Analyze New Image',
+                          'Save The Result',
                           style: AppStyles.styleMeduim24
                               .copyWith(fontSize: 15, color: Colors.white),
                         ),
-                        onTap: (){
+                        onTap: () {
                           setState(() {
-                            _image=null;
+                            Uint8List imageBytes = _image!.readAsBytesSync();
+
+                            addHistory(SearchModel(
+                                result: _result, imageBytes: imageBytes));
+                            _image = null;
                           });
+                          fetchAllHistory();
                         },
                       ),
-
                     ],
                   )
           ],

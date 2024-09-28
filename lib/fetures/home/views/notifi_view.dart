@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:x_ray2/core/utils/app_styles.dart';
 import 'package:x_ray2/core/utils/assets.dart';
 import 'package:x_ray2/fetures/splash/views/start_view.dart';
 
@@ -9,8 +10,14 @@ class NotifiView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Notifications'),
+         backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text(
+          'Notifications',
+          style: AppStyles.poppinsStylebold20,
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.settings),

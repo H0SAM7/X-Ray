@@ -5,3 +5,4 @@ const int timerCounter = 90;
 
 
 const String modelPath='assets/model_dicom_cancer2.tflite';
+const String kSearchHistoryBox='history';

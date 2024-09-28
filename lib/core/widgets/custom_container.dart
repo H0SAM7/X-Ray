@@ -4,9 +4,10 @@ import 'package:x_ray2/core/utils/app_styles.dart';
 
 class CustomContainer extends StatelessWidget {
   const CustomContainer({
-    super.key, this.onTap, this.child, this.color,
+    super.key, this.onTap, this.child, this.color, this.height,
   });
  final Color? color;
+ final double? height;
   final Widget? child;
 final void Function()? onTap;
   @override
@@ -14,7 +15,7 @@ final void Function()? onTap;
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 50,
+        height:height?? 50,
         width: 300,
         decoration: BoxDecoration(
           color: color?? const Color.fromARGB(255, 68, 92, 212),

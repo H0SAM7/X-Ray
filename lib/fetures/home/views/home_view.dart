@@ -13,6 +13,8 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 0,
+         backgroundColor: Colors.white,
         title: Text(
           "My Doctor",
           style: AppStyles.styleMeduim24,
