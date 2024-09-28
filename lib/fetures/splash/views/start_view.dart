@@ -6,7 +6,6 @@ import 'package:x_ray2/core/utils/assets.dart';
 import 'package:x_ray2/core/widgets/custom_button.dart';
 import 'package:x_ray2/fetures/auth/presentation/views/register_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/views/verification_view.dart';
-import 'package:x_ray2/fetures/home/views/home_view.dart';
 import 'package:x_ray2/fetures/splash/views/widgets/custom_show_dialog2.dart';
 import 'package:x_ray2/fetures/splash/views/widgets/read_crash_value.dart';
 import 'package:x_ray2/navigation_bar.dart';

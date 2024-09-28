@@ -11,7 +11,7 @@ import 'package:x_ray2/fetures/splash/views/start_view.dart';
 import 'package:x_ray2/navigation_bar.dart';
 
 abstract class AppRoutes {
-  static String? initialRoute = RegisterView.id;
+  static String? initialRoute = StartView.id;
   static Map<String, Widget Function(BuildContext)> routes = {
     LoginView.id: (context) => const LoginView(),
     RegisterView.id: (context) => const RegisterView(),

@@ -1,18 +1,43 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:x_ray2/core/utils/app_styles.dart';
 import 'package:x_ray2/core/utils/assets.dart';
 import 'package:x_ray2/fetures/splash/views/start_view.dart';
 
-class NotifiView extends StatelessWidget {
+class NotifiView extends StatefulWidget {
   const NotifiView({super.key});
   static String id = 'NotifiView';
+
+  @override
+  State<NotifiView> createState() => _NotifiViewState();
+}
+
+class _NotifiViewState extends State<NotifiView> {
+  getToken() async {
+    // String? token = await FirebaseMessaging.instance.getToken();
+    // log(token ?? '');
+    FirebaseMessaging.instance.getToken().then((String? token) {
+  assert(token != null);
+  log("FCM Token: $token");
+});
+  }
+
+  @override
+  void initState() {
+    getToken();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-         backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
           'Notifications',
