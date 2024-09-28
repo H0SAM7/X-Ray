@@ -9,6 +9,7 @@ import 'package:x_ray2/fetures/auth/presentation/views/verification_view.dart';
 import 'package:x_ray2/fetures/home/views/home_view.dart';
 import 'package:x_ray2/fetures/splash/views/widgets/custom_show_dialog2.dart';
 import 'package:x_ray2/fetures/splash/views/widgets/read_crash_value.dart';
+import 'package:x_ray2/navigation_bar.dart';
 
 class StartView extends StatelessWidget {
   const StartView({super.key});
@@ -62,7 +63,7 @@ class StartView extends StatelessWidget {
                     log('User is currently signed out!');
                   } else {
                     if (user.emailVerified) {
-                      Navigator.pushReplacementNamed(context, HomeView.id);
+                      Navigator.pushReplacementNamed(context, CustomBottomNavigationBar.id);
                       log('User is signed in!');
                     } else if (!user.emailVerified) {
                       Navigator.pushNamed(context, VerificationView.id);

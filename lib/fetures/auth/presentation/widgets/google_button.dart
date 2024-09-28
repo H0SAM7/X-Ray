@@ -13,28 +13,34 @@ class GoogleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        height: 50,
-        width: 300,
-        decoration: BoxDecoration(
-          border: Border.all(width: .2),
-            borderRadius: BorderRadius.circular(10),
-            //color: orangeColor,
-            ),
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-             Image.asset(Assets.imagesGoogle,width: 50,height: 40,) ,
-               const Text(
-                textAlign: TextAlign.center,
-               'Sign in With Google',
-                style: TextStyle(
-               //  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+      child: Card(
+         shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        elevation: 5,
+        child: Container(
+          height: 50,
+            width: double.infinity,
+          decoration: BoxDecoration(
+            border: Border.all(width: .2),
+              borderRadius: BorderRadius.circular(30),
+              //color: orangeColor,
               ),
-            ],
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+               Image.asset(Assets.imagesGoogle,width: 50,height: 40,) ,
+                 const Text(
+                  textAlign: TextAlign.center,
+                 'Continue with Google',
+                  style: TextStyle(
+                 //  color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

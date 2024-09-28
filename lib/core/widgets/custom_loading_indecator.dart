@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:x_ray2/constants.dart';
 
 class CustomLoadingIndicator extends StatelessWidget {
   const CustomLoadingIndicator({super.key, this.h = 24, this.w = 32});
@@ -15,8 +16,9 @@ class CustomLoadingIndicator extends StatelessWidget {
       child: const LoadingIndicator(
           indicatorType: Indicator.lineScalePulseOut,
           colors: [
-            Color.fromARGB(255, 0, 0, 0),
-            Color.fromARGB(255, 255, 255, 255)
+            blueColor,
+            Color.fromARGB(255, 255, 255, 255),
+                Color.fromARGB(255, 255, 255, 255)
           ]),
     ));
   }
