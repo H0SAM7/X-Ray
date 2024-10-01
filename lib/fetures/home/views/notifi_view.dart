@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:google_api_availability/google_api_availability.dart';
 import 'package:x_ray2/core/utils/app_styles.dart';
 import 'package:x_ray2/core/utils/assets.dart';
 import 'package:x_ray2/fetures/splash/views/start_view.dart';
@@ -17,19 +18,35 @@ class NotifiView extends StatefulWidget {
 }
 
 class _NotifiViewState extends State<NotifiView> {
-  getToken() async {
-    // String? token = await FirebaseMessaging.instance.getToken();
-    // log(token ?? '');
-    FirebaseMessaging.instance.getToken().then((String? token) {
-  assert(token != null);
-  log("FCM Token: $token");
-});
-  }
+//   getToken() async {
+//     // String? token = await FirebaseMessaging.instance.getToken();
+//     // log(token ?? '');
+//     FirebaseMessaging.instance.getToken().then((String? token) {
+//   assert(token != null);
+//   log("FCM Token: $token");
+// });
+//   }
+//   Future<void> checkGooglePlayServices() async {
+//     GooglePlayServicesAvailability availability;
+
+//     try {
+//       availability = await GoogleApiAvailability.instance
+//           .checkGooglePlayServicesAvailability();
+//       if (availability == GooglePlayServicesAvailability.success) {
+//         log('Google Play Services are available.');
+//       } else {
+//         log('Google Play Services are not available: $availability');
+//       }
+//     } catch (e) {
+//       log('Error occurred while checking Google Play Services: $e');
+//     }
+//   }
 
   @override
   void initState() {
-    getToken();
+    
     super.initState();
+    //getToken();
   }
 
   @override

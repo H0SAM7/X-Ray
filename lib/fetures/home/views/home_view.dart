@@ -125,6 +125,7 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                 ),
+ 
               ],
             ),
           ),

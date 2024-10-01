@@ -3,21 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:x_ray2/constants.dart';
 import 'package:x_ray2/core/utils/app_styles.dart';
-import 'package:x_ray2/core/utils/assets.dart';
 import 'package:x_ray2/core/widgets/custom_alert.dart';
 import 'package:x_ray2/core/widgets/custom_progress_hud.dart';
 import 'package:x_ray2/fetures/auth/manager/auth_cubit/auth_cubit.dart';
+import 'package:x_ray2/fetures/auth/presentation/views/add_detailes_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/views/login_view.dart';
-import 'package:x_ray2/fetures/auth/presentation/views/verification_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/auth_titile.dart';
-import 'package:x_ray2/fetures/auth/presentation/widgets/custom_send_button.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/custom_text_field.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/google_button.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/or_widget.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/signup_bottun.dart';
-import 'package:x_ray2/fetures/home/views/home_view.dart';
 import 'package:x_ray2/navigation_bar.dart';
-
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -29,7 +25,7 @@ class RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<RegisterView> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  String? email, password, name;
+  String? email, password, name, phone;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +44,8 @@ class _RegisterViewState extends State<RegisterView> {
             },
             actionTitle: 'OK',
           );
+        } else if (state is LoginWithGoogle) {
+          Navigator.pushReplacementNamed(context, AddDetailesView.id);
         }
       },
       builder: (context, state) {
@@ -62,11 +60,12 @@ class _RegisterViewState extends State<RegisterView> {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    const TitleWidget(title: "Sign Up",),
+                    const TitleWidget(
+                      title: "Sign Up",
+                    ),
                     Expanded(
                       child: Container(
                         width: double.infinity,
-                       
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
@@ -100,6 +99,24 @@ class _RegisterViewState extends State<RegisterView> {
                                     label: "Email",
                                     onChanged: (value) {
                                       email = value;
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  CustomTextFrom(
+                                    hint: 'Enter Your Phone Number',
+                                    label: 'Phone Number',
+                                    onChanged: (value) {
+                                      phone = value;
+                                    },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please Enter Phone Number';
+                                      } else if (value.length != 8) {
+                                        return 'Please Enter Correct Number';
+                                      }
+                                      return null;
                                     },
                                   ),
                                   const SizedBox(
@@ -149,23 +166,26 @@ class _RegisterViewState extends State<RegisterView> {
                                                 context)
                                             .register(
                                                 email: email!,
-                                                password: password!);
+                                                password: password!,
+                                                phone: phone!,
+                                                userName: name!);
+                                                
                                       }
+
+
                                     },
                                   ),
                                   const SizedBox(
                                     height: 16,
                                   ),
                                   const OrWidget(),
-                      
+
                                   GoogleButton(
                                     onTap: () async {
                                       await BlocProvider.of<AuthCubit>(context)
                                           .signInWithGoogle();
                                     },
                                   ),
-                                 
-                           
                                 ],
                               ),
                             ),

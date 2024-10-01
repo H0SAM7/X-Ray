@@ -1,16 +1,20 @@
+import 'dart:developer';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:x_ray2/fetures/ai/views/save_data.dart';
 import 'package:x_ray2/fetures/home/views/history_view.dart';
 import 'package:x_ray2/fetures/home/views/home_view.dart';
 import 'package:x_ray2/fetures/home/views/notifi_view.dart';
-
-
+import 'package:x_ray2/temp/test.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
-  static String id='CustomBottomNavigationBar';
+  static String id = 'CustomBottomNavigationBar';
 
   const CustomBottomNavigationBar({super.key});
   @override
-_CustomBottomNavigationBarState createState() => _CustomBottomNavigationBarState();
+  _CustomBottomNavigationBarState createState() =>
+      _CustomBottomNavigationBarState();
 }
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
@@ -19,15 +23,28 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   final List<Widget> _pages = [
     HomeView(),
     HistoryView(),
-        NotifiView(),
-
-
+    NotifiView(),
+    // MyHomePage()
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    fetchAllHistory();
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      log('Got a message whilst in the foreground!');
+      log('Message data: ${message.data}');
+
+      if (message.notification != null) {
+        log('Message also contained a notification: ${message.notification!.body}');
+      }
+    });
+    super.initState();
   }
 
   @override
@@ -41,7 +58,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         items: <BottomNavigationBarItem>[
           _buildBottomNavigationBarItem(Icons.home, 'Home', 0),
           _buildBottomNavigationBarItem(Icons.history, 'history', 1),
-          _buildBottomNavigationBarItem(Icons.notifications, 'Notifications', 2),
+          _buildBottomNavigationBarItem(
+              Icons.notifications, 'Notifications', 2),
+         // _buildBottomNavigationBarItem(Icons.notifications, 'test', 2),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
@@ -54,7 +73,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     );
   }
 
-  BottomNavigationBarItem _buildBottomNavigationBarItem(IconData icon, String label, int index, {bool isCentral = false}) {
+  BottomNavigationBarItem _buildBottomNavigationBarItem(
+      IconData icon, String label, int index,
+      {bool isCentral = false}) {
     return BottomNavigationBarItem(
       icon: Row(
         mainAxisAlignment: MainAxisAlignment.center,

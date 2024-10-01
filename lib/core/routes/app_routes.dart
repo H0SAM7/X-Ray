@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:x_ray2/fetures/ai/views/ml_model.dart';
+import 'package:x_ray2/fetures/auth/presentation/views/add_detailes_view.dart';
+import 'package:x_ray2/fetures/auth/presentation/views/forget_password_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/views/login_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/views/register_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/views/verification_view.dart';
@@ -21,7 +23,8 @@ abstract class AppRoutes {
     ImageClassificationScreen.id: (context) => ImageClassificationScreen(),
     CustomBottomNavigationBar.id: (context) => CustomBottomNavigationBar(),
     HistoryView.id: (context) => HistoryView(),
-        NotifiView.id: (context) => NotifiView(),
-
+    NotifiView.id: (context) => NotifiView(),
+    ForgetPasswordView.id: (context) => ForgetPasswordView(),
+    AddDetailesView.id: (context) => AddDetailesView(),
   };
 }

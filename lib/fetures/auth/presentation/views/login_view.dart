@@ -3,18 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:x_ray2/constants.dart';
 import 'package:x_ray2/core/utils/app_styles.dart';
-import 'package:x_ray2/core/utils/assets.dart';
 import 'package:x_ray2/core/widgets/custom_alert.dart';
 import 'package:x_ray2/core/widgets/custom_progress_hud.dart';
 import 'package:x_ray2/fetures/auth/manager/auth_cubit/auth_cubit.dart';
+import 'package:x_ray2/fetures/auth/presentation/views/add_detailes_view.dart';
+import 'package:x_ray2/fetures/auth/presentation/views/forget_password_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/views/register_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/auth_titile.dart';
-import 'package:x_ray2/fetures/auth/presentation/widgets/custom_send_button.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/custom_text_field.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/google_button.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/or_widget.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/signup_bottun.dart';
-import 'package:x_ray2/fetures/home/views/home_view.dart';
 import 'package:x_ray2/navigation_bar.dart';
 
 class LoginView extends StatefulWidget {
@@ -29,6 +28,7 @@ class _LoginViewState extends State<LoginView> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String? email, password;
+  bool firstLogin = true;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
@@ -60,7 +60,9 @@ class _LoginViewState extends State<LoginView> {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    const TitleWidget(title: "Sign In",),
+                    const TitleWidget(
+                      title: "Log In",
+                    ),
                     Expanded(
                       child: Container(
                         width: double.infinity,
@@ -103,13 +105,13 @@ class _LoginViewState extends State<LoginView> {
                                       password = value;
                                     },
                                   ),
-                              
+
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: TextButton(
                                       onPressed: () {
                                         Navigator.pushNamed(
-                                            context, RegisterView.id);
+                                            context, ForgetPasswordView.id);
                                       },
                                       child: Text(
                                         'Forget Password?',
@@ -117,7 +119,7 @@ class _LoginViewState extends State<LoginView> {
                                       ),
                                     ),
                                   ),
-                              
+
                                   // CustomAuthButton(
                                   //   label: 'Send',
                                   //   onTap: () async {
@@ -142,14 +144,14 @@ class _LoginViewState extends State<LoginView> {
                                       }
                                     },
                                   ),
-                                      const OrWidget(),
-                                      
-                                  GoogleButton(
-                                    onTap: () async {
-                                      await BlocProvider.of<AuthCubit>(context)
-                                          .signInWithGoogle();
-                                    },
-                                  ),
+                                  // const OrWidget(),
+
+                                  // GoogleButton(
+                                  //   onTap: () async {
+                                  //     await BlocProvider.of<AuthCubit>(context)
+                                  //         .signInWithGoogle();
+                                  //   },
+                                  // ),
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pushNamed(
@@ -160,7 +162,6 @@ class _LoginViewState extends State<LoginView> {
                                       style: AppStyles.style12,
                                     ),
                                   ),
-                                
                                 ],
                               ),
                             ),
