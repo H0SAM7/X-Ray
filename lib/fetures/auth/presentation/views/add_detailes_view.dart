@@ -20,7 +20,8 @@ class _AddDetailesViewState extends State<AddDetailesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: Colors.white,
         title: Text(
@@ -37,7 +38,9 @@ class _AddDetailesViewState extends State<AddDetailesView> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 100,),
+                SizedBox(
+                  height: 100,
+                ),
                 CustomTextFrom(
                   hint: 'Enter Your Name',
                   label: "Name",
@@ -71,7 +74,9 @@ class _AddDetailesViewState extends State<AddDetailesView> {
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
                       try {
-                        await FirebaseFirestore.instance.collection('users').add({
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .add({
                           "userName": name,
                           "phone": phone,
                         });
@@ -83,10 +88,11 @@ class _AddDetailesViewState extends State<AddDetailesView> {
                             builder: (context) {
                               return ConfirmationDialog2(
                                   title: 'Error',
-                                  content: FirebaseFailure.fromFirebaseException(
-                                          e as Exception)
-                                      .errMessage
-                                      .toString(),
+                                  content:
+                                      FirebaseFailure.fromFirebaseException(
+                                              e as Exception)
+                                          .errMessage
+                                          .toString(),
                                   onConfirm: () {
                                     Navigator.pop(context);
                                   },

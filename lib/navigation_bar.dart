@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:x_ray2/fetures/ai/views/save_data.dart';
 import 'package:x_ray2/fetures/home/views/history_view.dart';
 import 'package:x_ray2/fetures/home/views/home_view.dart';
-import 'package:x_ray2/fetures/home/views/notifi_view.dart';
-import 'package:x_ray2/temp/test.dart';
+import 'package:x_ray2/fetures/Notifications/views/notifi_view.dart';
+import 'package:x_ray2/fetures/Notifications/send_notifications_view.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   static String id = 'CustomBottomNavigationBar';
@@ -24,7 +24,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     HomeView(),
     HistoryView(),
     NotifiView(),
-    // MyHomePage()
+    NotifactionsSendView()
   ];
 
   void _onItemTapped(int index) {
@@ -60,7 +60,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           _buildBottomNavigationBarItem(Icons.history, 'history', 1),
           _buildBottomNavigationBarItem(
               Icons.notifications, 'Notifications', 2),
-         // _buildBottomNavigationBarItem(Icons.notifications, 'test', 2),
+     _buildBottomNavigationBarItem(Icons.notifications, 'test', 2),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,

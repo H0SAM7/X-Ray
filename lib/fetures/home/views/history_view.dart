@@ -43,6 +43,7 @@ elevation: 0,
           style: AppStyles.poppinsStylebold20,
         ),
         actions: [
+          
           IconButton(
             icon: Icon(Icons.settings),
             onPressed: () {
@@ -68,6 +69,7 @@ elevation: 0,
       body: SafeArea(
         child: Column(
           children: [
+              Divider(),
             history == null || history!.isEmpty
                 ? Expanded(
                     child: Center(child: Image.asset(Assets.imagesNohistory)))

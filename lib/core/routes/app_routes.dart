@@ -8,7 +8,7 @@ import 'package:x_ray2/fetures/auth/presentation/views/register_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/views/verification_view.dart';
 import 'package:x_ray2/fetures/home/views/history_view.dart';
 import 'package:x_ray2/fetures/home/views/home_view.dart';
-import 'package:x_ray2/fetures/home/views/notifi_view.dart';
+import 'package:x_ray2/fetures/Notifications/views/notifi_view.dart';
 import 'package:x_ray2/fetures/splash/views/start_view.dart';
 import 'package:x_ray2/navigation_bar.dart';
 

@@ -3,13 +3,15 @@ import 'package:x_ray2/constants.dart';
 import 'package:x_ray2/core/utils/app_styles.dart';
 import 'package:x_ray2/fetures/ai/views/ml_model.dart';
 import 'package:x_ray2/fetures/home/views/history_view.dart';
-import 'package:x_ray2/fetures/home/views/notifi_view.dart';
+import 'package:x_ray2/fetures/Notifications/views/notifi_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
   static String id = 'HomeView';
+
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -32,18 +34,19 @@ class HomeView extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+            Divider(),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hello, Hosam',
+                    'Hello, Welcom To My Doctor',
                     style:
                         AppStyles.poppinsStylebold20.copyWith(color: blueColor),
                   ),
                   Text(
-                    'Welcom To My Doctor App',
+                    ' How are Today ?',
                     style: AppStyles.style12.copyWith(
                       fontSize: 15,
                     ),

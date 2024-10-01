@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -169,10 +170,10 @@ class _RegisterViewState extends State<RegisterView> {
                                                 password: password!,
                                                 phone: phone!,
                                                 userName: name!);
-                                                
+                                        await FirebaseMessaging.instance
+                                            .subscribeToTopic('all');
+                                
                                       }
-
-
                                     },
                                   ),
                                   const SizedBox(
@@ -184,6 +185,8 @@ class _RegisterViewState extends State<RegisterView> {
                                     onTap: () async {
                                       await BlocProvider.of<AuthCubit>(context)
                                           .signInWithGoogle();
+                                      await FirebaseMessaging.instance
+                                          .subscribeToTopic('all');
                                     },
                                   ),
                                 ],
