@@ -6,13 +6,10 @@ import 'package:x_ray2/core/utils/app_styles.dart';
 import 'package:x_ray2/core/widgets/custom_alert.dart';
 import 'package:x_ray2/core/widgets/custom_progress_hud.dart';
 import 'package:x_ray2/fetures/auth/manager/auth_cubit/auth_cubit.dart';
-import 'package:x_ray2/fetures/auth/presentation/views/add_detailes_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/views/forget_password_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/views/register_view.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/auth_titile.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/custom_text_field.dart';
-import 'package:x_ray2/fetures/auth/presentation/widgets/google_button.dart';
-import 'package:x_ray2/fetures/auth/presentation/widgets/or_widget.dart';
 import 'package:x_ray2/fetures/auth/presentation/widgets/signup_bottun.dart';
 import 'package:x_ray2/navigation_bar.dart';
 
