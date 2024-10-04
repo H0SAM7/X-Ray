@@ -124,7 +124,7 @@ class _NotifiViewState extends State<NotifiView> {
                             _notifications.clear();
                           });
                         },
-                        icon: Icon(Icons.logout)),
+                        icon: Icon(Icons.clear)),
                   ),
                   PopupMenuItem(
                     child: TextButton.icon(

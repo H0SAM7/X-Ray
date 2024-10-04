@@ -24,7 +24,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     HomeView(),
     HistoryView(),
     NotifiView(),
-    NotifactionsSendView()
+  //  NotifactionsSendView()
   ];
 
   void _onItemTapped(int index) {
@@ -60,7 +60,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           _buildBottomNavigationBarItem(Icons.history, 'history', 1),
           _buildBottomNavigationBarItem(
               Icons.notifications, 'Notifications', 2),
-     _buildBottomNavigationBarItem(Icons.notifications, 'test', 2),
+    // _buildBottomNavigationBarItem(Icons.notifications, 'test', 2),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,

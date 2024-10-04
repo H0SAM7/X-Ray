@@ -16,8 +16,8 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObserever();
-    Hive.registerAdapter(SearchModelAdapter());
-  await Hive.openBox<SearchModel>(kSearchHistoryBox);
+    Hive.registerAdapter(SearchModelAdapter(),);
+  await Hive.openBox<SearchModel>(kSearchHistoryBox,);
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
