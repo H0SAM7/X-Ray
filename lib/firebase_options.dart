@@ -41,49 +41,51 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC5jXLO2YyVTt6ihn4hmpT0WKViv_vD8mk',
-    appId: '1:138549974499:web:416bb90ed104e242bcfcd6',
-    messagingSenderId: '138549974499',
-    projectId: 'x-ray-2c7c1',
-    authDomain: 'x-ray-2c7c1.firebaseapp.com',
-    storageBucket: 'x-ray-2c7c1.appspot.com',
-    measurementId: 'G-8LPVZXSBPD',
+    apiKey: 'AIzaSyC7oYeuViyBoktW7URP_bME1JSFjN9gUNg',
+    appId: '1:813412901326:web:493ce95c316bf24d058b9f',
+    messagingSenderId: '813412901326',
+    projectId: 'x-ray-123',
+    authDomain: 'x-ray-123.firebaseapp.com',
+    storageBucket: 'x-ray-123.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC6zhP_3NDZpHNyv495K47jwoVpLeoJmJk',
-    appId: '1:138549974499:android:3b5fb75a481583b3bcfcd6',
-    messagingSenderId: '138549974499',
-    projectId: 'x-ray-2c7c1',
-    storageBucket: 'x-ray-2c7c1.appspot.com',
+    apiKey: 'AIzaSyBpnQm1HGAPcM96f-cY5LGitlc2M51pF4Q',
+    appId: '1:813412901326:android:4eff15391006efe0058b9f',
+    messagingSenderId: '813412901326',
+    projectId: 'x-ray-123',
+    storageBucket: 'x-ray-123.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCUjXg6H6tVyYkmc_wR4yzPvjQ038e4oOQ',
-    appId: '1:138549974499:ios:300fda7ce6d2129ebcfcd6',
-    messagingSenderId: '138549974499',
-    projectId: 'x-ray-2c7c1',
-    storageBucket: 'x-ray-2c7c1.appspot.com',
+    apiKey: 'AIzaSyCzOxQKjQ8teJAGmq3wx3ledqg_nsi4hqk',
+    appId: '1:813412901326:ios:7e7507b73d5fcbfa058b9f',
+    messagingSenderId: '813412901326',
+    projectId: 'x-ray-123',
+    storageBucket: 'x-ray-123.appspot.com',
+    androidClientId: '813412901326-p9gpkhb6lbmg2l7la2pcjiej2944hrin.apps.googleusercontent.com',
+    iosClientId: '813412901326-ss33icqflgv7q9pnot0fsm1mnl3bduuj.apps.googleusercontent.com',
     iosBundleId: 'com.example.xRay2',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCUjXg6H6tVyYkmc_wR4yzPvjQ038e4oOQ',
-    appId: '1:138549974499:ios:300fda7ce6d2129ebcfcd6',
-    messagingSenderId: '138549974499',
-    projectId: 'x-ray-2c7c1',
-    storageBucket: 'x-ray-2c7c1.appspot.com',
+    apiKey: 'AIzaSyCzOxQKjQ8teJAGmq3wx3ledqg_nsi4hqk',
+    appId: '1:813412901326:ios:7e7507b73d5fcbfa058b9f',
+    messagingSenderId: '813412901326',
+    projectId: 'x-ray-123',
+    storageBucket: 'x-ray-123.appspot.com',
+    androidClientId: '813412901326-p9gpkhb6lbmg2l7la2pcjiej2944hrin.apps.googleusercontent.com',
+    iosClientId: '813412901326-ss33icqflgv7q9pnot0fsm1mnl3bduuj.apps.googleusercontent.com',
     iosBundleId: 'com.example.xRay2',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyC5jXLO2YyVTt6ihn4hmpT0WKViv_vD8mk',
-    appId: '1:138549974499:web:aa149390044c741dbcfcd6',
-    messagingSenderId: '138549974499',
-    projectId: 'x-ray-2c7c1',
-    authDomain: 'x-ray-2c7c1.firebaseapp.com',
-    storageBucket: 'x-ray-2c7c1.appspot.com',
-    measurementId: 'G-ZSTRF0F4Z0',
+    apiKey: 'AIzaSyC7oYeuViyBoktW7URP_bME1JSFjN9gUNg',
+    appId: '1:813412901326:web:3f7dac5d2384c3ff058b9f',
+    messagingSenderId: '813412901326',
+    projectId: 'x-ray-123',
+    authDomain: 'x-ray-123.firebaseapp.com',
+    storageBucket: 'x-ray-123.appspot.com',
   );
 
 }

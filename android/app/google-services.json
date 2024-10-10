@@ -1,26 +1,87 @@
 {
   "project_info": {
-    "project_number": "138549974499",
-    "project_id": "x-ray-2c7c1",
-    "storage_bucket": "x-ray-2c7c1.appspot.com"
+    "project_number": "813412901326",
+    "project_id": "x-ray-123",
+    "storage_bucket": "x-ray-123.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:138549974499:android:3b5fb75a481583b3bcfcd6",
+        "mobilesdk_app_id": "1:813412901326:android:62c40c56cb7f1364058b9f",
         "android_client_info": {
-          "package_name": "com.example.x_ray2"
+          "package_name": "com.example.x_ray"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "813412901326-p9gpkhb6lbmg2l7la2pcjiej2944hrin.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.x_ray",
+            "certificate_hash": "8f0cea6e921c2aa5ea798ba4f930e14c4e4f5887"
+          }
+        },
+        {
+          "client_id": "813412901326-gccbu4q1tvsuajasm84h90tmcsa3r80n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6zhP_3NDZpHNyv495K47jwoVpLeoJmJk"
+          "current_key": "AIzaSyBpnQm1HGAPcM96f-cY5LGitlc2M51pF4Q"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "813412901326-gccbu4q1tvsuajasm84h90tmcsa3r80n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "813412901326-qndobiqs8pja211nm7r3i61p91p81pmb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.xRay"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813412901326:android:4eff15391006efe0058b9f",
+        "android_client_info": {
+          "package_name": "com.example.x_ray2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "813412901326-gccbu4q1tvsuajasm84h90tmcsa3r80n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpnQm1HGAPcM96f-cY5LGitlc2M51pF4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "813412901326-gccbu4q1tvsuajasm84h90tmcsa3r80n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "813412901326-qndobiqs8pja211nm7r3i61p91p81pmb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.xRay"
+              }
+            }
+          ]
         }
       }
     }

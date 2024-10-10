@@ -1,12 +1,10 @@
 import 'dart:developer';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:x_ray2/fetures/ai/views/save_data.dart';
 import 'package:x_ray2/fetures/home/views/history_view.dart';
 import 'package:x_ray2/fetures/home/views/home_view.dart';
 import 'package:x_ray2/fetures/Notifications/views/notifi_view.dart';
-import 'package:x_ray2/fetures/Notifications/send_notifications_view.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   static String id = 'CustomBottomNavigationBar';

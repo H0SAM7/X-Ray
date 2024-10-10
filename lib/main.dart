@@ -10,14 +10,17 @@ import 'package:x_ray2/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-
 void main() async {
-    await Hive.initFlutter();
+  await Hive.initFlutter();
 
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObserever();
-    Hive.registerAdapter(SearchModelAdapter(),);
-  await Hive.openBox<SearchModel>(kSearchHistoryBox,);
+  Hive.registerAdapter(
+    SearchModelAdapter(),
+  );
+  await Hive.openBox<SearchModel>(
+    kSearchHistoryBox,
+  );
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -34,7 +37,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your applicatio
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -47,6 +49,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
